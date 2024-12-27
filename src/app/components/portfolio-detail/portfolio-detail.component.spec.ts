@@ -31,7 +31,7 @@ describe('PortfolioDetailComponent', () => {
 
         fixture = TestBed.createComponent(PortfolioDetailComponent);
         component = fixture.componentInstance;
-        (component as any).portfolio = () => mockPortfolio;
+        fixture.componentRef.setInput('portfolio', mockPortfolio);
         fixture.detectChanges();
     });
 
