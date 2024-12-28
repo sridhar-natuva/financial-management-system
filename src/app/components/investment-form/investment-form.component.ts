@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Investment } from '../../models/portfolio.model';
@@ -127,6 +127,7 @@ import { PortfolioService } from '../../services/portfolio.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InvestmentFormComponent {
+  newInvestmentDetails = output<{ investment: Investment, portfolioId: string }>();
   investmentForm = new FormGroup({
     portfolioId: new FormControl<Investment['id']>('', { validators: Validators.required, nonNullable: true }),
     name: new FormControl<Investment['name']>('', { validators: [Validators.required, Validators.minLength(2)], nonNullable: true }),
@@ -150,8 +151,7 @@ export class InvestmentFormComponent {
         currentPrice: formValue.purchasePrice, // Initially set to purchase price
         purchaseDate: new Date(formValue.purchaseDate)
       };
-
-      this.portfolioService.addInvestment(formValue.portfolioId, investment);
+      this.newInvestmentDetails.emit({ investment, portfolioId: formValue.portfolioId });
       this.resetForm();
     }
   }

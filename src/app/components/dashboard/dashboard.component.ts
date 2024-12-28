@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PortfolioService } from '../../services/portfolio.service';
 import { PortfolioMetricsComponent } from './portfolio-metrics/portfolio-metrics.component';
 import { PortfolioListComponent } from '../portfolio-list/portfolio-list.component';
 import { InvestmentFormComponent } from '../investment-form/investment-form.component';
+import { Investment } from '../../models/portfolio.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,9 +17,12 @@ import { InvestmentFormComponent } from '../investment-form/investment-form.comp
   template: `
     <div class="dashboard">
       <app-portfolio-metrics [portfolios]="(portfolios$ | async) ?? []" />
+      <button (click)="addInvestmentFormDialogRef.showModal()">Add Investment</button>
       <div class="dashboard-content">
         <app-portfolio-list />
-        <app-investment-form />
+        <dialog #addInvestmentFormDialogRef>
+          <app-investment-form (newInvestmentDetails)="addInvestment($event)" />
+        </dialog>
       </div>
     </div>
   `,
@@ -41,5 +45,11 @@ import { InvestmentFormComponent } from '../investment-form/investment-form.comp
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent {
+  dialogRef = viewChild<ElementRef<HTMLDialogElement>>('addInvestmentFormDialogRef');
+  portfolioService: PortfolioService = inject(PortfolioService);
   portfolios$ = inject(PortfolioService).getPortfolios();
+  addInvestment(newInvestmentDetails: any): void {
+    this.portfolioService.addInvestment(newInvestmentDetails.portfolioId, newInvestmentDetails.investment);
+    this.dialogRef()?.nativeElement.close();
+  }
 }
