@@ -31,7 +31,7 @@ import { Portfolio } from '../../models/portfolio.model';
   `,
   styles: [`
     .portfolio-card {
-      background: white;
+      background: #d6d6d6;
       border-radius: 8px;
       padding: 20px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);

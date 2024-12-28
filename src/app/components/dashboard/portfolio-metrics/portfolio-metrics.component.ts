@@ -32,7 +32,7 @@ import { Portfolio } from '../../../models/portfolio.model';
       margin-bottom: 20px;
     }
     .metric-card {
-      background: white;
+      background: #d6d6d6;
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
