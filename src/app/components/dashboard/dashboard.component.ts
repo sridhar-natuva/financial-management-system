@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, inject, viewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { PortfolioService } from '../../services/portfolio.service';
 import { PortfolioMetricsComponent } from './portfolio-metrics/portfolio-metrics.component';
 import { PortfolioListComponent } from '../portfolio-list/portfolio-list.component';
@@ -9,7 +9,7 @@ import { Investment } from '../../models/portfolio.model';
 @Component({
   selector: 'app-dashboard',
   imports: [
-    CommonModule,
+    AsyncPipe,
     PortfolioMetricsComponent,
     PortfolioListComponent,
     InvestmentFormComponent

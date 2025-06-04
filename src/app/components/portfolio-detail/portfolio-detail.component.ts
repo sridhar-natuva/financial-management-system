@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, input, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CurrencyPipe } from '@angular/common';
 import { Portfolio } from '../../models/portfolio.model';
 
 @Component({
   selector: 'app-portfolio-detail',
-  imports: [CommonModule],
+  imports: [CurrencyPipe],
   template: `
     <div class="portfolio-card">
       <h3>{{ portfolio().name }}</h3>

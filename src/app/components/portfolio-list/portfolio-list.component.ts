@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { AsyncPipe, CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Portfolio } from '../../models/portfolio.model';
 import { PortfolioService } from '../../services/portfolio.service';
 import { PortfolioDetailComponent } from '../portfolio-detail/portfolio-detail.component';
 
 @Component({
   selector: 'app-portfolio-list',
-  imports: [CommonModule, PortfolioDetailComponent, AsyncPipe],
+  imports: [PortfolioDetailComponent, AsyncPipe],
   template: `
     <div class="portfolio-list">
       <h2>My Portfolios</h2>
