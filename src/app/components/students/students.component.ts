@@ -1,4 +1,4 @@
-import { afterRender, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -22,12 +22,6 @@ export class StudentsComponent {
     ])
   })
 
-  constructor() {
-    afterRender(() => {
-      console.log('Students component rendered');
-    });
-    console.log('Students component created');
-  }
 
   get students(): FormArray {
     return this.studentsForm.get('students') as FormArray;
