@@ -7,6 +7,4 @@ import { RouterOutlet } from '@angular/router';
   template: `<router-outlet />`,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent {
-  title = 'financial-management-system';
-}
+export class AppComponent { }
