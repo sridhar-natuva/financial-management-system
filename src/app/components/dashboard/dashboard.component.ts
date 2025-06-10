@@ -1,15 +1,12 @@
 import { ChangeDetectionStrategy, Component, ElementRef, inject, viewChild } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
 import { PortfolioService } from '../../services/portfolio.service';
 import { PortfolioMetricsComponent } from './portfolio-metrics/portfolio-metrics.component';
 import { PortfolioListComponent } from '../portfolio-list/portfolio-list.component';
 import { InvestmentFormComponent } from '../investment-form/investment-form.component';
-import { Investment } from '../../models/portfolio.model';
 
 @Component({
   selector: 'app-dashboard',
   imports: [
-    AsyncPipe,
     PortfolioMetricsComponent,
     PortfolioListComponent,
     InvestmentFormComponent

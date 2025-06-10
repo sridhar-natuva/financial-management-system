@@ -1,12 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject, output } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Investment } from '../../models/portfolio.model';
 import { PortfolioService } from '../../services/portfolio.service';
 
 @Component({
   selector: 'app-investment-form',
-  imports: [AsyncPipe, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   template: `
     <div class="form-container">
       <h2>Add New Investment</h2>
