@@ -11,7 +11,7 @@ import { PortfolioDetailComponent } from '../portfolio-detail/portfolio-detail.c
     <div class="portfolio-list">
       <h2>My Portfolios</h2>
       <div class="portfolios">
-        @for (portfolio of (portfolios$ | async); track portfolio.id) {
+        @for (portfolio of portfolios(); track portfolio.id) {
           <app-portfolio-detail [portfolio]="portfolio" />
         }
       </div>
@@ -31,6 +31,5 @@ import { PortfolioDetailComponent } from '../portfolio-detail/portfolio-detail.c
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PortfolioListComponent {
-  portfolios: Portfolio[] = [];
-  portfolios$ = inject(PortfolioService).getPortfolios();
+  portfolios = inject(PortfolioService).getPortfolios();
 }

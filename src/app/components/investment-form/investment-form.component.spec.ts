@@ -3,7 +3,7 @@ import { InvestmentFormComponent } from './investment-form.component';
 import { PortfolioService } from '../../services/portfolio.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { of } from 'rxjs';
-import { ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, signal } from '@angular/core';
 import { Investment, Portfolio } from '../../models/portfolio.model';
 
 describe('InvestmentFormComponent', () => {
@@ -11,7 +11,7 @@ describe('InvestmentFormComponent', () => {
     let fixture: ComponentFixture<InvestmentFormComponent>;
     let mockPortfolioService: jasmine.SpyObj<PortfolioService>;
 
-    const mockPortfolios: Portfolio[] = [
+    const mockPortfolios = signal([
         {
             id: '1', name: 'Portfolio 1',
             investments: [],
@@ -24,11 +24,11 @@ describe('InvestmentFormComponent', () => {
             totalValue: 0,
             lastUpdated: new Date()
         }
-    ];
+    ]);
 
     beforeEach(async () => {
         mockPortfolioService = jasmine.createSpyObj('PortfolioService', ['getPortfolios', 'addInvestment']);
-        mockPortfolioService.getPortfolios.and.returnValue(of(mockPortfolios));
+        mockPortfolioService.getPortfolios.and.returnValue(mockPortfolios);
 
         await TestBed.configureTestingModule({
             imports: [ReactiveFormsModule, InvestmentFormComponent],

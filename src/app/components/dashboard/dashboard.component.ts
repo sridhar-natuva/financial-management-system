@@ -16,7 +16,7 @@ import { Investment } from '../../models/portfolio.model';
   ],
   template: `
     <div class="dashboard">
-      <app-portfolio-metrics [portfolios]="(portfolios$ | async) ?? []" />
+      <app-portfolio-metrics [portfolios]="portfolios()" />
       <button (click)="addInvestmentFormDialogRef.showModal()">Add Investment</button>
       <div class="dashboard-content">
         <app-portfolio-list />
@@ -47,7 +47,7 @@ import { Investment } from '../../models/portfolio.model';
 export class DashboardComponent {
   dialogRef = viewChild<ElementRef<HTMLDialogElement>>('addInvestmentFormDialogRef');
   portfolioService: PortfolioService = inject(PortfolioService);
-  portfolios$ = inject(PortfolioService).getPortfolios();
+  portfolios = inject(PortfolioService).getPortfolios();
   addInvestment(newInvestmentDetails: any): void {
     this.portfolioService.addInvestment(newInvestmentDetails.portfolioId, newInvestmentDetails.investment);
     this.dialogRef()?.nativeElement.close();

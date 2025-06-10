@@ -14,7 +14,7 @@ import { PortfolioService } from '../../services/portfolio.service';
         <div class="form-field">
           <label for="portfolioId">Portfolio</label>
           <select id="portfolioId" formControlName="portfolioId" required>
-            @for (portfolio of (portfolios$ | async); track portfolio.id) {
+            @for (portfolio of portfolios(); track portfolio.id) {
               <option [value]="portfolio.id">{{ portfolio.name }}</option>
             }
           </select>
@@ -137,7 +137,7 @@ export class InvestmentFormComponent {
     purchaseDate: new FormControl<Investment['purchaseDate']>(new Date(), { validators: Validators.required, nonNullable: true })
   });
   portfolioService = inject(PortfolioService);
-  portfolios$ = this.portfolioService.getPortfolios();
+  portfolios = this.portfolioService.getPortfolios();
 
   onSubmit(): void {
     if (this.investmentForm.valid) {

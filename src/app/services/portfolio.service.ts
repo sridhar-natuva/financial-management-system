@@ -1,33 +1,34 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Portfolio, Investment } from '../models/portfolio.model';
 import { MockDataService } from './mock-data.service';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PortfolioService {
-  private portfolios: Portfolio[] = [];
-  private portfoliosSubject = new BehaviorSubject<Portfolio[]>([]);
+  private portfolios = signal<Portfolio[]>([]);
 
   constructor(private mockDataService: MockDataService) {
     // Initialize with mock data
-    this.portfolios = this.mockDataService.getMockPortfolios();
-    this.portfoliosSubject.next(this.portfolios);
+    this.portfolios.set(this.mockDataService.getMockPortfolios());
   }
 
-  getPortfolios(): Observable<Portfolio[]> {
-    return this.portfoliosSubject.asObservable();
+  getPortfolios() {
+    return this.portfolios;
   }
 
   addInvestment(portfolioId: string, investment: Investment): void {
-    const portfolio = this.portfolios.find(p => p.id === portfolioId);
-    if (portfolio) {
-      portfolio.investments.push(investment);
-      portfolio.totalValue = this.calculatePortfolioValue(portfolio);
-      portfolio.lastUpdated = new Date();
-      this.portfoliosSubject.next([...this.portfolios]);
-    }
+    this.portfolios.update((folios) => {
+      const folio = folios.find(p => p.id === portfolioId);
+      if (folio) {
+        folio.investments = [...folio.investments, investment];
+        folio.totalValue = this.calculatePortfolioValue(folio);
+        folio.lastUpdated = new Date();
+      }
+      return [...folios];
+    });
   }
 
   private calculatePortfolioValue(portfolio: Portfolio): number {
