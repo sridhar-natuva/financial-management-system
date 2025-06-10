@@ -1,8 +1,6 @@
 import { Injectable, signal } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { Portfolio, Investment } from '../models/portfolio.model';
 import { MockDataService } from './mock-data.service';
-import { toObservable } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root'

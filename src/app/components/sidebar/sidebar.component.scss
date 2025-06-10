@@ -1,0 +1,68 @@
+.dashboard-sidebar {
+    width: 240px;
+    height: 100%;
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    /* Stack sidebar items vertically */
+    padding: 1.5rem;
+    transition: width 0.3s ease;
+}
+
+/* Sidebar Specifics */
+.sidebar-header h3 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.sidebar-nav {
+    flex-grow: 1;
+    /* Pushes the footer to the bottom */
+}
+
+.sidebar-nav ul {
+    list-style-type: none;
+}
+
+.sidebar-nav ul li a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-weight: 500;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.sidebar-nav ul li a:hover {
+    background-color: var(--primary-bg);
+    color: var(--text-primary);
+}
+
+.sidebar-nav ul li a.active {
+    background-color: var(--accent-color);
+    color: #ffffff;
+}
+
+.sidebar-footer .user-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    color: var(--text-primary);
+}
+
+/* Placeholder for icons */
+.icon-placeholder {
+    width: 20px;
+    height: 20px;
+    background-color: #ccc;
+    /* Replace with actual icon library */
+    border-radius: 4px;
+}

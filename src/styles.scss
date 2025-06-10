@@ -1,1 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+/* Basic Reset and Font Styling */
+:root {
+    --primary-bg: #f4f7fa;
+    /* Light grey for the main background */
+    --sidebar-bg: #ffffff;
+    /* White for the sidebar */
+    --text-primary: #1e293b;
+    /* Dark text for high contrast */
+    --text-secondary: #64748b;
+    /* Grey text for labels */
+    --accent-color: #4f46e5;
+    /* A nice blue/indigo for active links and buttons */
+    --border-color: #e2e8f0;
+    /* Light border color */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body,
+html {
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    background-color: var(--primary-bg);
+}
