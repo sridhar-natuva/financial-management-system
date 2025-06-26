@@ -1,14 +1,24 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { PortfolioService } from '../../services/portfolio.service';
 import { Portfolio } from '../../models/portfolio.model';
+import { DatePipe, DecimalPipe, NgClass, TitleCasePipe } from '@angular/common';
+
+interface Tab {
+  label: string;
+  filter: 'all' | 'active' | 'balanced' | 'closed';
+}
 
 @Component({
   selector: 'app-portfolios',
   standalone: true,
-  imports: [CommonModule],
   templateUrl: './portfolios.component.html',
   styleUrl: './portfolios.component.scss',
+  imports: [
+    NgClass,
+    DatePipe,
+    DecimalPipe,
+    TitleCasePipe
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PortfoliosComponent {
@@ -16,13 +26,13 @@ export class PortfoliosComponent {
   portfolios = this.portfolioService.getPortfolios();
 
   // Tabs and filtering logic
-  tabs = [
+  tabs: Tab[] = [
     { label: 'All', filter: 'all' },
     { label: 'Active', filter: 'active' },
     { label: 'Balanced', filter: 'balanced' },
     { label: 'Closed', filter: 'closed' }
   ];
-  selectedTab = signal('all');
+  selectedTab = signal<Tab['filter']>('all');
 
   // For demo, assign types based on name (in real app, use a property)
   getPortfolioType(portfolio: Portfolio): 'active' | 'balanced' | 'closed' | 'high-risk' {
@@ -38,7 +48,7 @@ export class PortfoliosComponent {
     return this.portfolios().filter(p => this.getPortfolioType(p) === tab);
   });
 
-  getTabCount(filter: string): number {
+  getTabCount(filter: Tab['filter']): number {
     if (filter === 'all') return this.portfolios().length;
     return this.portfolios().filter(p => this.getPortfolioType(p) === filter).length;
   }
@@ -61,7 +71,7 @@ export class PortfoliosComponent {
     ];
   }
 
-  onTabSelect(tab: string) {
+  onTabSelect(tab: Tab['filter']) {
     this.selectedTab.set(tab);
   }
 
