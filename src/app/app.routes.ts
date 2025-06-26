@@ -5,7 +5,10 @@ import { PortfolioListComponent } from './components/portfolio-list/portfolio-li
 export const routes: Routes = [
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
     { path: 'dashboard', component: DashboardComponent },
-    { path: 'portfolios', component: PortfolioListComponent },
+    {
+      path: 'portfolios',
+      loadComponent: () => import('./components/portfolios/portfolios.component').then(m => m.PortfoliosComponent)
+    },
     // { path: 'analystics', component: DashboardComponent }
 
 ];

@@ -45,6 +45,7 @@ export class DashboardComponent {
   dialogRef = viewChild<ElementRef<HTMLDialogElement>>('addInvestmentFormDialogRef');
   portfolioService: PortfolioService = inject(PortfolioService);
   portfolios = this.portfolioService.getPortfolios();
+
   addInvestment(newInvestmentDetails: any): void {
     this.portfolioService.addInvestment(newInvestmentDetails.portfolioId, newInvestmentDetails.investment);
     this.dialogRef()?.nativeElement.close();
