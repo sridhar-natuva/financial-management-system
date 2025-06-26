@@ -1,53 +1,69 @@
-import { ChangeDetectionStrategy, Component, ElementRef, inject, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { PortfolioService } from '../../services/portfolio.service';
-import { PortfolioMetricsComponent } from './portfolio-metrics/portfolio-metrics.component';
-import { PortfolioListComponent } from '../portfolio-list/portfolio-list.component';
-import { InvestmentFormComponent } from '../investment-form/investment-form.component';
+import { Portfolio, Investment } from '../../models/portfolio.model';
+import { DatePipe, DecimalPipe, NgClass, TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
+  standalone: true,
+  templateUrl: './dashboard.component.html',
+  styleUrl: './dashboard.component.scss',
   imports: [
-    PortfolioMetricsComponent,
-    PortfolioListComponent,
-    InvestmentFormComponent
+    NgClass,
+    DecimalPipe,
+    TitleCasePipe
   ],
-  template: `
-    <div class="dashboard">
-      <app-portfolio-metrics [portfolios]="portfolios()" />
-      <button (click)="addInvestmentFormDialogRef.showModal()">Add Investment</button>
-      <div class="dashboard-content">
-        <app-portfolio-list />
-        <dialog #addInvestmentFormDialogRef>
-          <app-investment-form (newInvestmentDetails)="addInvestment($event)" />
-        </dialog>
-      </div>
-    </div>
-  `,
-  styles: [`
-    .dashboard {
-      padding: 20px;
-    }
-    .dashboard-content {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 20px;
-      margin-top: 20px;
-    }
-    @media (max-width: 768px) {
-      .dashboard-content {
-        grid-template-columns: 1fr;
-      }
-    }
-  `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent {
-  dialogRef = viewChild<ElementRef<HTMLDialogElement>>('addInvestmentFormDialogRef');
-  portfolioService: PortfolioService = inject(PortfolioService);
+  portfolioService = inject(PortfolioService);
   portfolios = this.portfolioService.getPortfolios();
 
-  addInvestment(newInvestmentDetails: any): void {
-    this.portfolioService.addInvestment(newInvestmentDetails.portfolioId, newInvestmentDetails.investment);
-    this.dialogRef()?.nativeElement.close();
+  userName = 'Sridhar'; // In a real app, get from user profile
+
+  totalPortfolioValue = computed(() =>
+    this.portfolios().reduce((sum, p) => sum + p.totalValue, 0)
+  );
+
+  // Mock: 2.5% growth in last 24h
+  growthPercent = 2.5;
+
+  // Asset allocation by type
+  assetAllocation = computed(() => {
+    const allocation: Record<string, number> = {};
+    let total = 0;
+    this.portfolios().forEach(portfolio => {
+      portfolio.investments.forEach(inv => {
+        const value = inv.quantity * inv.currentPrice;
+        allocation[inv.type] = (allocation[inv.type] || 0) + value;
+        total += value;
+      });
+    });
+    return Object.entries(allocation).map(([type, value]) => ({
+      type,
+      percent: total ? Math.round((value / total) * 100) : 0
+    }));
+  });
+
+  // Top holdings for each portfolio (top 2 by value)
+  getTopHoldings(portfolio: Portfolio): { name: string; value: number; type: string }[] {
+    return [...portfolio.investments]
+      .sort((a, b) => (b.quantity * b.currentPrice) - (a.quantity * a.currentPrice))
+      .slice(0, 2)
+      .map(inv => ({
+        name: inv.name,
+        value: inv.quantity * inv.currentPrice,
+        type: inv.type
+      }));
+  }
+
+  onAddInvestment() {
+    // Placeholder for add investment action
+    alert('Add Investment clicked!');
+  }
+
+  onViewHistory() {
+    // Placeholder for view history action
+    alert('View History clicked!');
   }
 }

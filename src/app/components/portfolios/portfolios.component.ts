@@ -22,8 +22,7 @@ interface Tab {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PortfoliosComponent {
-  private portfolioService = inject(PortfolioService);
-  portfolios = this.portfolioService.getPortfolios();
+  portfolios = inject(PortfolioService).getPortfolios();
 
   // Tabs and filtering logic
   tabs: Tab[] = [

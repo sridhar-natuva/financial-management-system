@@ -1,35 +1,46 @@
 <aside class="dashboard-sidebar">
     <div class="sidebar-header">
-        <h3>Financial App</h3>
+        <span class="brand-icon">🏦</span>
+        <h3>FinDash</h3>
     </div>
     <nav class="sidebar-nav">
         <ul>
             <li>
                 <a routerLink="/dashboard" routerLinkActive="active">
-                    <i class="icon-placeholder"></i> Overview
+                    <span class="nav-icon"> <svg width="20" height="20" fill="none"><rect x="3" y="8" width="14" height="9" rx="2" fill="#2563eb"/><rect x="7" y="3" width="6" height="5" rx="1" fill="#2563eb" fill-opacity=".5"/></svg> </span>
+                    Overview
                 </a>
             </li>
             <li>
                 <a routerLink="/portfolios" routerLinkActive="active">
-                    <i class="icon-placeholder"></i> Portfolios
+                    <span class="nav-icon"> <svg width="20" height="20" fill="none"><rect x="2" y="5" width="16" height="11" rx="2" fill="#a259ff"/><rect x="6" y="2" width="8" height="4" rx="1" fill="#a259ff" fill-opacity=".5"/></svg> </span>
+                    Portfolios
                 </a>
             </li>
             <li>
                 <a routerLink="/analytics" routerLinkActive="active">
-                    <i class="icon-placeholder"></i> Analytics
+                    <span class="nav-icon"> <svg width="20" height="20" fill="none"><rect x="3" y="10" width="3" height="7" rx="1.5" fill="#00b894"/><rect x="8.5" y="6" width="3" height="11" rx="1.5" fill="#00b894"/><rect x="14" y="3" width="3" height="14" rx="1.5" fill="#00b894"/></svg> </span>
+                    Analytics
                 </a>
             </li>
             <li>
                 <a routerLink="/settings" routerLinkActive="active">
-                    <i class="icon-placeholder"></i> Settings
+                    <span class="nav-icon"> <svg width="20" height="20" fill="none"><circle cx="10" cy="10" r="8" stroke="#fdcb6e" stroke-width="2"/><circle cx="10" cy="10" r="3" fill="#fdcb6e"/></svg> </span>
+                    Settings
                 </a>
             </li>
         </ul>
     </nav>
     <div class="sidebar-footer">
         <div class="user-profile">
-            <i class="icon-placeholder"></i>
-            <span>Sridhar Natuva</span>
+            <img class="avatar" src="https://api.dicebear.com/7.x/adventurer/svg?seed=sridhar" alt="User avatar" />
+            <div class="user-info">
+                <span class="user-name">Sridhar Natuva</span>
+                <span class="user-email">s.natuva&#64;email.com</span>
+            </div>
         </div>
+        <a class="logout-link" href="#">
+            <span class="logout-icon">&#x21bb;</span> Logout
+        </a>
     </div>
 </aside>
