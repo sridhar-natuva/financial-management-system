@@ -15,3 +15,16 @@ export interface Portfolio {
   totalValue: number;
   lastUpdated: Date;
 }
+
+export interface NewsItem {
+  id: string;
+  title: string;
+  timestamp: string;
+  icon: string;
+}
+
+export interface TopHolding {
+  name: string;
+  value: number;
+  type: string;
+}

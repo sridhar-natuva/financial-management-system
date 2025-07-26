@@ -19,13 +19,13 @@
     <div class="summary-title">Asset Allocation</div>
     <div class="allocation-list">
       @for (alloc of assetAllocation(); track alloc.type) {
-        <div class="allocation-item">
-          <span class="type">{{ alloc.type | titlecase }}</span>
-          <div class="bar-bg">
-            <div class="bar" [style.width]="alloc.percent + '%'" [attr.data-type]="alloc.type"></div>
-          </div>
-          <span class="percent">{{ alloc.percent }}%</span>
+      <div class="allocation-item">
+        <span class="type">{{ alloc.type | titlecase }}</span>
+        <div class="bar-bg">
+          <div class="bar" [style.width]="alloc.percent + '%'" [attr.data-type]="alloc.type"></div>
         </div>
+        <span class="percent">{{ alloc.percent }}%</span>
+      </div>
       }
     </div>
   </div>
@@ -38,36 +38,36 @@
   </div>
   <div class="portfolio-cards">
     @for (portfolio of portfolios(); track portfolio.id) {
-      <div class="portfolio-card">
-        <div class="card-header">
-          <h3>{{ portfolio.name }}</h3>
-          <span class="badge" [ngClass]="portfolio.name.toLowerCase().includes('conservative') ? 'balanced' : 'active'">
-            {{ portfolio.name.toLowerCase().includes('conservative') ? 'Balanced' : 'Active' }}
-          </span>
+    <div class="portfolio-card">
+      <div class="card-header">
+        <h3>{{ portfolio.name }}</h3>
+        <span class="badge" [ngClass]="portfolio.name.toLowerCase().includes('conservative') ? 'balanced' : 'active'">
+          {{ portfolio.name.toLowerCase().includes('conservative') ? 'Balanced' : 'Active' }}
+        </span>
+      </div>
+      <div class="card-body">
+        <div class="portfolio-stats">
+          <div class="stat">
+            <span class="label">Total Value</span>
+            <span class="value">${{ portfolio.totalValue | number:'1.0-2' }}</span>
+          </div>
+          <div class="stat">
+            <span class="label">Investments</span>
+            <span class="value">{{ portfolio.investments.length }}</span>
+          </div>
         </div>
-        <div class="card-body">
-          <div class="portfolio-stats">
-            <div class="stat">
-              <span class="label">Total Value</span>
-              <span class="value">${{ portfolio.totalValue | number:'1.0-2' }}</span>
-            </div>
-            <div class="stat">
-              <span class="label">Investments</span>
-              <span class="value">{{ portfolio.investments.length }}</span>
-            </div>
+        <div class="top-holdings">
+          <span class="label">Top Holdings</span>
+          @for (holding of getTopHoldings(portfolio); track holding.name) {
+          <div class="holding-item">
+            <span class="icon" [attr.data-type]="holding.type"></span>
+            <span class="name">{{ holding.name }}</span>
+            <span class="amount">${{ holding.value | number:'1.0-2' }}</span>
           </div>
-          <div class="top-holdings">
-            <span class="label">Top Holdings</span>
-            @for (holding of getTopHoldings(portfolio); track holding.name) {
-              <div class="holding-item">
-                <span class="icon" [attr.data-type]="holding.type"></span>
-                <span class="name">{{ holding.name }}</span>
-                <span class="amount">${{ holding.value | number:'1.0-2' }}</span>
-              </div>
-            }
-          </div>
+          }
         </div>
       </div>
+    </div>
     }
   </div>
-</div> 
+</div>

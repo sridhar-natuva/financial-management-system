@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { PortfolioService } from '../../services/portfolio.service';
-import { Portfolio, Investment } from '../../models/portfolio.model';
+import { Portfolio, Investment, TopHolding } from '../../models/portfolio.model';
 import { DatePipe, DecimalPipe, NgClass, TitleCasePipe } from '@angular/common';
 
 @Component({
@@ -18,20 +18,24 @@ import { DatePipe, DecimalPipe, NgClass, TitleCasePipe } from '@angular/common';
 export class DashboardComponent {
   portfolioService = inject(PortfolioService);
   portfolios = this.portfolioService.getPortfolios();
+  newsItems = this.portfolioService.getNewsItems();
 
   userName = 'Sridhar'; // In a real app, get from user profile
+  growthPercent = 2.5; // Mock: 2.5% growth in last 24h
+
+  selectedTimePeriod = signal('1W');
+  timePeriods = ['1D', '1W', '1M', '3M', '1Y'];
 
   totalPortfolioValue = computed(() =>
     this.portfolios().reduce((sum, p) => sum + p.totalValue, 0)
   );
 
-  // Mock: 2.5% growth in last 24h
-  growthPercent = 2.5;
 
   // Asset allocation by type
   assetAllocation = computed(() => {
     const allocation: Record<string, number> = {};
     let total = 0;
+
     this.portfolios().forEach(portfolio => {
       portfolio.investments.forEach(inv => {
         const value = inv.quantity * inv.currentPrice;
@@ -39,14 +43,15 @@ export class DashboardComponent {
         total += value;
       });
     });
+
     return Object.entries(allocation).map(([type, value]) => ({
-      type,
-      percent: total ? Math.round((value / total) * 100) : 0
+      type: this.formatAssetType(type),
+      percent: total ? Math.round((value / total) * 100) : 0,
+      color: this.getAssetColor(type)
     }));
   });
 
-  // Top holdings for each portfolio (top 2 by value)
-  getTopHoldings(portfolio: Portfolio): { name: string; value: number; type: string }[] {
+  getTopHoldings(portfolio: Portfolio): TopHolding[] {
     return [...portfolio.investments]
       .sort((a, b) => (b.quantity * b.currentPrice) - (a.quantity * a.currentPrice))
       .slice(0, 2)
@@ -57,13 +62,39 @@ export class DashboardComponent {
       }));
   }
 
-  onAddInvestment() {
-    // Placeholder for add investment action
+  private formatAssetType(type: string): string {
+    const typeMap: Record<string, string> = {
+      'stock': 'Stocks',
+      'crypto': 'Crypto',
+      'bond': 'Bonds',
+      'mutual-fund': 'Mutual Funds'
+    };
+    return typeMap[type] || type;
+  }
+
+  private getAssetColor(type: string): string {
+    const colorMap: Record<string, string> = {
+      'stock': '#3b82f6',
+      'crypto': '#8b5cf6',
+      'bond': '#10b981',
+      'mutual-fund': '#f59e0b'
+    };
+    return colorMap[type] || '#6b7280';
+  }
+
+  onTimePeriodChange(period: string): void {
+    this.selectedTimePeriod.set(period);
+  }
+
+  onAddInvestment(): void {
     alert('Add Investment clicked!');
   }
 
-  onViewHistory() {
-    // Placeholder for view history action
+  onViewHistory(): void {
     alert('View History clicked!');
+  }
+
+  onRebalance(): void {
+    alert('Rebalance Portfolio clicked!');
   }
 }
