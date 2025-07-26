@@ -43,7 +43,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # This is the folder where 'ng build' puts the compiled files
-          path: ./dist/financial-management-system/
+          path: ./dist/browser/financial-management-system/
 
   # This job deploys the build artifact to GitHub Pages
   deploy:
