@@ -48,7 +48,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # This looks correct assuming your angular.json outputPath is 'dist/financial-management-system'
-          path: dist/financial-management-system/
+          path: dist/financial-management-system/browser/
 
   deploy:
     needs: build
