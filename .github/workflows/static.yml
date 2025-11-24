@@ -33,6 +33,10 @@ jobs:
         # IMPORTANT: Ensure 'financial-management-system' matches your GitHub Repository name exactly.
         run: npm run build -- --base-href /financial-management-system/
 
+        # ADD THIS DEBUG STEP
+      - name: Debug - List contents of dist
+        run: ls -R dist
+
       # OPTIONAL PRO TIP: Fixes "404" errors when refreshing the page on a sub-route
       - name: Create 404 fallback
         run: cp dist/financial-management-system/browser/index.html dist/financial-management-system/browser/404.html
