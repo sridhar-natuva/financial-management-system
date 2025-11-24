@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@a
 import { PortfolioService } from '../../services/portfolio.service';
 import { Portfolio, Investment, TopHolding } from '../../models/portfolio.model';
 import { DatePipe, DecimalPipe, NgClass, TitleCasePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,6 +18,7 @@ import { DatePipe, DecimalPipe, NgClass, TitleCasePipe } from '@angular/common';
 })
 export class DashboardComponent {
   portfolioService = inject(PortfolioService);
+  router = inject(Router);
   portfolios = this.portfolioService.getPortfolios();
   newsItems = this.portfolioService.getNewsItems();
 
@@ -91,10 +93,14 @@ export class DashboardComponent {
   }
 
   onViewHistory(): void {
-    alert('View History clicked!');
+    this.router.navigate(['/history']);
   }
 
   onRebalance(): void {
     alert('Rebalance Portfolio clicked!');
+  }
+
+  onViewPortfolio(portfolioId: string): void {
+    this.router.navigate(['/portfolio', portfolioId]);
   }
 }

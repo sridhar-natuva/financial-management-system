@@ -63,11 +63,11 @@
             <span class="icon" [attr.data-type]="holding.type"></span>
             <span class="name">{{ holding.name }}</span>
             <span class="amount">${{ holding.value | number:'1.0-2' }}</span>
-            test
           </div>
           }
         </div>
       </div>
+      <button class="view-portfolio" (click)="onViewPortfolio(portfolio.id)">View Details</button>
     </div>
     }
   </div>

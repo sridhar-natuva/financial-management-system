@@ -17,6 +17,10 @@ export class PortfolioService {
     return this.portfolios;
   }
 
+  getPortfolioById(id: string): Portfolio | undefined {
+    return this.portfolios().find(p => p.id === id);
+  }
+
   addInvestment(portfolioId: string, investment: Investment): void {
     this.portfolios.update((folios) => {
       const folio = folios.find(p => p.id === portfolioId);

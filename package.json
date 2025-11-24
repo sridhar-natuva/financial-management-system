@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "vitest",
+    "test:karma": "ng test",
+    "test:watch": "vitest --watch"
   },
   "private": true,
   "dependencies": {
@@ -33,6 +35,9 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.9.3"
+    "typescript": "~5.9.3",
+    "vitest": "~4.0.13",
+    "vite": "^5.0.0",
+    "jsdom": "^22.0.0"
   }
 }

@@ -1,10 +1,12 @@
 .dashboard-header {
   margin-bottom: 2rem;
+
   h1 {
     font-size: 2.1rem;
     font-weight: 700;
     margin: 0;
   }
+
   .subtitle {
     color: #6c7a89;
     font-size: 1.1rem;
@@ -22,34 +24,45 @@
 .summary-card {
   background: #fff;
   border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(44,62,80,0.07);
+  box-shadow: 0 4px 24px rgba(44, 62, 80, 0.07);
   padding: 2rem 1.5rem 1.5rem 1.5rem;
   min-width: 320px;
   flex: 1 1 320px;
   display: flex;
   flex-direction: column;
+
   .summary-title {
     font-size: 1.1rem;
     color: #6c7a89;
     font-weight: 600;
     margin-bottom: 0.7rem;
   }
+
   .summary-value {
     font-size: 2.1rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
   }
+
   .summary-growth {
     color: #1a7f37;
     font-size: 1rem;
     margin-bottom: 1.2rem;
-    &.positive { color: #1a7f37; }
-    &.negative { color: #d7263d; }
+
+    &.positive {
+      color: #1a7f37;
+    }
+
+    &.negative {
+      color: #d7263d;
+    }
   }
+
   .summary-actions {
     display: flex;
     gap: 1rem;
     margin-top: auto;
+
     button.primary {
       background: #2563eb;
       color: #fff;
@@ -59,10 +72,14 @@
       font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(37,99,235,0.08);
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
       transition: background 0.2s;
-      &:hover { background: #174ea6; }
+
+      &:hover {
+        background: #174ea6;
+      }
     }
+
     button.secondary {
       background: #f4f6fa;
       color: #2563eb;
@@ -72,7 +89,10 @@
       font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
-      &:hover { background: #e6f0fa; }
+
+      &:hover {
+        background: #e6f0fa;
+      }
     }
   }
 }
@@ -80,31 +100,48 @@
 .asset-allocation {
   .allocation-list {
     margin-top: 1rem;
+
     .allocation-item {
       display: flex;
       align-items: center;
       gap: 1rem;
       margin-bottom: 0.7rem;
+
       .type {
         min-width: 90px;
         color: #6c7a89;
         font-weight: 500;
       }
+
       .bar-bg {
         background: #f0f2f5;
         border-radius: 4px;
         width: 120px;
         height: 8px;
         overflow: hidden;
+
         .bar {
           height: 100%;
           border-radius: 4px;
         }
-        .bar[data-type="stock"] { background: #2563eb; }
-        .bar[data-type="crypto"] { background: #a259ff; }
-        .bar[data-type="bond"] { background: #00b894; }
-        .bar[data-type="mutual-fund"] { background: #fdcb6e; }
+
+        .bar[data-type="stock"] {
+          background: #2563eb;
+        }
+
+        .bar[data-type="crypto"] {
+          background: #a259ff;
+        }
+
+        .bar[data-type="bond"] {
+          background: #00b894;
+        }
+
+        .bar[data-type="mutual-fund"] {
+          background: #fdcb6e;
+        }
       }
+
       .percent {
         min-width: 32px;
         text-align: right;
@@ -117,68 +154,92 @@
 
 .my-portfolios-section {
   margin-top: 2.5rem;
+
   .section-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 1.2rem;
+
     h2 {
       font-size: 1.3rem;
       font-weight: 700;
       margin: 0;
     }
+
     .view-all {
       color: #2563eb;
       font-weight: 600;
       text-decoration: none;
       font-size: 1rem;
       transition: color 0.2s;
-      &:hover { color: #174ea6; }
+
+      &:hover {
+        color: #174ea6;
+      }
     }
   }
+
   .portfolio-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
     gap: 2rem;
   }
+
   .portfolio-card {
     background: #fff;
     border-radius: 16px;
-    box-shadow: 0 4px 24px rgba(44,62,80,0.07);
+    box-shadow: 0 4px 24px rgba(44, 62, 80, 0.07);
     padding: 1.5rem 1.2rem 1.2rem 1.2rem;
     display: flex;
     flex-direction: column;
+
     .card-header {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
       margin-bottom: 1rem;
+      flex-direction: column;
+      row-gap: 0.5rem;
+
       h3 {
         font-size: 1.1rem;
         font-weight: 700;
         margin: 0;
       }
+
       .badge {
         font-size: 0.95rem;
         font-weight: 600;
         border-radius: 6px;
         padding: 0.3em 0.9em;
-        &.active { background: #e6f4ea; color: #1a7f37; }
-        &.balanced { background: #e6f0fa; color: #2563eb; }
+
+        &.active {
+          background: #e6f4ea;
+          color: #1a7f37;
+        }
+
+        &.balanced {
+          background: #e6f0fa;
+          color: #2563eb;
+        }
       }
     }
+
     .card-body {
       .portfolio-stats {
         display: flex;
-        gap: 2.5rem;
-        margin-bottom: 1.1rem;
+        gap: 18rem;
+
         .stat {
           display: flex;
           flex-direction: column;
+
           .label {
             color: #b0b8c1;
             font-size: 0.98em;
           }
+
           .value {
             font-size: 1.2em;
             font-weight: 700;
@@ -186,19 +247,23 @@
           }
         }
       }
+
       .top-holdings {
         margin-top: 1rem;
+
         .label {
           color: #b0b8c1;
           font-size: 0.98em;
           margin-bottom: 0.5em;
           display: block;
         }
+
         .holding-item {
           display: flex;
           align-items: center;
           gap: 0.7rem;
           margin-bottom: 0.5em;
+
           .icon {
             width: 24px;
             height: 24px;
@@ -206,14 +271,28 @@
             background: #f0f2f5;
             display: inline-block;
           }
-          .icon[data-type="stock"] { background: #f5faff url('data:image/svg+xml;utf8,<svg ... />') no-repeat center/cover; }
-          .icon[data-type="crypto"] { background: #f3e8ff url('data:image/svg+xml;utf8,<svg ... />') no-repeat center/cover; }
-          .icon[data-type="bond"] { background: #e6f4ea url('data:image/svg+xml;utf8,<svg ... />') no-repeat center/cover; }
-          .icon[data-type="mutual-fund"] { background: #fffbe6 url('data:image/svg+xml;utf8,<svg ... />') no-repeat center/cover; }
+
+          .icon[data-type="stock"] {
+            background: #f5faff url('data:image/svg+xml;utf8,<svg ... />') no-repeat center/cover;
+          }
+
+          .icon[data-type="crypto"] {
+            background: #f3e8ff url('data:image/svg+xml;utf8,<svg ... />') no-repeat center/cover;
+          }
+
+          .icon[data-type="bond"] {
+            background: #e6f4ea url('data:image/svg+xml;utf8,<svg ... />') no-repeat center/cover;
+          }
+
+          .icon[data-type="mutual-fund"] {
+            background: #fffbe6 url('data:image/svg+xml;utf8,<svg ... />') no-repeat center/cover;
+          }
+
           .name {
             flex: 1;
             font-weight: 500;
           }
+
           .amount {
             font-weight: 600;
             color: #2c3e50;
@@ -229,7 +308,8 @@
     flex-direction: column;
     gap: 1.5rem;
   }
+
   .my-portfolios-section .portfolio-cards {
     grid-template-columns: 1fr;
   }
-} 
+}
