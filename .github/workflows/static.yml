@@ -1,23 +1,17 @@
-# Name of your workflow
 name: Deploy Angular to GitHub Pages
 
-# Run this workflow on pushes to the main branch
 on:
   push:
     branches:
       - main
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Grant GITHUB_TOKEN the permissions required to deploy to GitHub Pages
 permissions:
   contents: write
   pages: write
   id-token: write
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This job builds the Angular application
   build:
     runs-on: ubuntu-latest
 
@@ -34,7 +28,14 @@ jobs:
         run: npm ci
 
       - name: Build Angular App
-        run: npm run build --base-href financial-management-system
+        # FIX 1: Added '--' to pass arguments correctly
+        # FIX 2: Added slashes around the repo name: /financial-management-system/
+        # IMPORTANT: Ensure 'financial-management-system' matches your GitHub Repository name exactly.
+        run: npm run build -- --base-href /financial-management-system/
+
+      # OPTIONAL PRO TIP: Fixes "404" errors when refreshing the page on a sub-route
+      - name: Create 404 fallback
+        run: cp dist/financial-management-system/index.html dist/financial-management-system/404.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -42,21 +43,15 @@ jobs:
       - name: Upload build artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # This is the folder where 'ng build' puts the compiled files
+          # This looks correct assuming your angular.json outputPath is 'dist/financial-management-system'
           path: dist/financial-management-system/
 
-  # This job deploys the build artifact to GitHub Pages
   deploy:
-    # Requires the 'build' job to have completed successfully
     needs: build
-
-    # Configure the deployment environment
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
     runs-on: ubuntu-latest
-
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
