@@ -11,7 +11,7 @@ on:
 
 # Grant GITHUB_TOKEN the permissions required to deploy to GitHub Pages
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -43,7 +43,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # This is the folder where 'ng build' puts the compiled files
-          path: ./dist/financial-management-system/
+          path: dist/financial-management-system/
 
   # This job deploys the build artifact to GitHub Pages
   deploy:
