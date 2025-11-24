@@ -35,7 +35,7 @@ jobs:
 
       # OPTIONAL PRO TIP: Fixes "404" errors when refreshing the page on a sub-route
       - name: Create 404 fallback
-        run: cp dist/financial-management-system/index.html dist/financial-management-system/404.html
+        run: cp dist/financial-management-system/browser/index.html dist/financial-management-system/browser/404.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
