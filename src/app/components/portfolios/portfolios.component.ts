@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@a
 import { PortfolioService } from '../../services/portfolio.service';
 import { Portfolio } from '../../models/portfolio.model';
 import { DatePipe, DecimalPipe, NgClass, TitleCasePipe } from '@angular/common';
+import { CurrencyConverterPipe } from '../../pipes/currency-converter.pipe';
 
 interface Tab {
   label: string;
@@ -17,7 +18,8 @@ interface Tab {
     NgClass,
     DatePipe,
     DecimalPipe,
-    TitleCasePipe
+    TitleCasePipe,
+    CurrencyConverterPipe
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

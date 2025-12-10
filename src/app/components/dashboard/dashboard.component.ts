@@ -3,6 +3,7 @@ import { PortfolioService } from '../../services/portfolio.service';
 import { Portfolio, TopHolding } from '../../models/portfolio.model';
 import { DecimalPipe, NgClass, TitleCasePipe } from '@angular/common';
 import { Router } from '@angular/router';
+import { CurrencyConverterPipe } from '../../pipes/currency-converter.pipe';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +13,8 @@ import { Router } from '@angular/router';
   imports: [
     NgClass,
     DecimalPipe,
-    TitleCasePipe
+    TitleCasePipe,
+    CurrencyConverterPipe
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

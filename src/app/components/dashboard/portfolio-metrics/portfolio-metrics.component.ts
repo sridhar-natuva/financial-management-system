@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component, input, Input } from '@angular/core';
-import { CurrencyPipe } from '@angular/common';
 import { Portfolio } from '../../../models/portfolio.model';
+import { CurrencyConverterPipe } from '../../../pipes/currency-converter.pipe';
 
 @Component({
   selector: 'app-portfolio-metrics',
-  imports: [CurrencyPipe],
+  imports: [CurrencyConverterPipe],
   template: `
     <div class="metrics-container">
       <div class="metric-card">
         <h3>Total Value</h3>
-        <p class="value">{{ getTotalValue() | currency }}</p>
+        <p class="value">{{ getTotalValue() | currencyConverter }}</p>
       </div>
       <div class="metric-card">
         <h3>Asset Allocation</h3>

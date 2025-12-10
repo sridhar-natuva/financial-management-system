@@ -1,17 +1,17 @@
 import { Component, input } from '@angular/core';
-import { CurrencyPipe } from '@angular/common';
 import { Portfolio } from '../../models/portfolio.model';
+import { CurrencyConverterPipe } from '../../pipes/currency-converter.pipe';
 
 @Component({
   selector: 'app-portfolio-detail',
-  imports: [CurrencyPipe],
+  imports: [CurrencyConverterPipe],
   template: `
     <div class="portfolio-card">
       <h3>{{ portfolio().name }}</h3>
       <div class="portfolio-stats">
         <div class="stat">
           <span class="label">Total Value:</span>
-          <span class="value">{{ portfolio().totalValue | currency }}</span>
+          <span class="value">{{ portfolio().totalValue | currencyConverter }}</span>
         </div>
         <div class="stat">
           <span class="label">Investments:</span>
@@ -23,7 +23,7 @@ import { Portfolio } from '../../models/portfolio.model';
         @for (investment of portfolio().investments; track investment.id) {
           <div class="investment-item">
             <span>{{ investment.name }}</span>
-            <span>{{ investment.quantity * investment.currentPrice | currency }}</span>
+            <span>{{ investment.quantity * investment.currentPrice | currencyConverter }}</span>
           </div>
         }
       </div>

@@ -29,7 +29,7 @@
       <div class="portfolio-stats">
         <div class="stat">
           <span class="label">Total Value</span>
-          <span class="value">${{ portfolio.totalValue | number:'1.0-2' }}</span>
+          <span class="value">{{ portfolio.totalValue | currencyConverter:'1.0-2' }}</span>
         </div>
         <div class="stat">
           <span class="label">Return ({{ getReturn(portfolio).period }})</span>

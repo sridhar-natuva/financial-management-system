@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { DecimalPipe } from '@angular/common';
+import { CurrencyService, CurrencyCode } from '../../services/currency.service';
 
 interface ProfileForm {
   fullName: string;
@@ -13,12 +15,14 @@ interface ProfileForm {
 @Component({
   selector: 'app-settings',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, DecimalPipe],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsComponent {
+  currencyService = inject(CurrencyService);
+  
   tabs = [
     { label: 'Profile', key: 'profile' },
     { label: 'Notifications', key: 'notifications' },
@@ -37,6 +41,10 @@ export class SettingsComponent {
   });
 
   countries = ['United States', 'India', 'United Kingdom', 'Canada', 'Australia'];
+
+  // Currency preferences
+  selectedCurrency = this.currencyService.getSelectedCurrency();
+  currencies = this.currencyService.currencies;
 
   onTabSelect(tab: string) {
     this.selectedTab.set(tab);
@@ -57,5 +65,9 @@ export class SettingsComponent {
   onSave() {
     // Placeholder for save action
     alert('Profile changes saved!');
+  }
+
+  onCurrencyChange(currency: CurrencyCode) {
+    this.currencyService.setCurrency(currency);
   }
 }
