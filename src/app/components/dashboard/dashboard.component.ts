@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { PortfolioService } from '../../services/portfolio.service';
-import { Portfolio, Investment, TopHolding } from '../../models/portfolio.model';
-import { DatePipe, DecimalPipe, NgClass, TitleCasePipe } from '@angular/common';
+import { Portfolio, TopHolding } from '../../models/portfolio.model';
+import { DecimalPipe, NgClass, TitleCasePipe } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({

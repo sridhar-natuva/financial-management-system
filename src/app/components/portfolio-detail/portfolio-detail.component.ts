@@ -31,37 +31,115 @@ import { Portfolio } from '../../models/portfolio.model';
   `,
   styles: [`
     .portfolio-card {
-      background: #d6d6d6;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(44, 62, 80, 0.07);
+      padding: 2rem 1.5rem;
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+
+      &:hover {
+        box-shadow: 0 6px 32px rgba(44, 62, 80, 0.12);
+      }
+
+      h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0 0 1.5rem 0;
+        color: #2c3e50;
+        border-bottom: 2px solid #f0f2f5;
+        padding-bottom: 1rem;
+      }
     }
+
     .portfolio-stats {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-      margin: 15px 0;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: #f8f9fa;
+      border-radius: 12px;
     }
+
     .stat {
       display: flex;
       flex-direction: column;
+      gap: 0.5rem;
+
+      .label {
+        color: #6c7a89;
+        font-size: 0.95rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .value {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #2c3e50;
+        line-height: 1.2;
+      }
     }
-    .label {
-      color: #666;
-      font-size: 0.9em;
-    }
-    .value {
-      font-size: 1.2em;
-      font-weight: bold;
-    }
+
     .investments {
-      margin-top: 20px;
+      margin-top: 2rem;
+
+      h4 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin: 0 0 1.2rem 0;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid #f0f2f5;
+      }
     }
+
     .investment-item {
       display: flex;
       justify-content: space-between;
-      padding: 8px 0;
-      border-bottom: 1px solid #eee;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid #f0f2f5;
+      transition: background-color 0.2s ease, padding-left 0.2s ease;
+
+      &:hover {
+        background-color: #f8f9fa;
+        padding-left: 0.5rem;
+        border-radius: 8px;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      span:first-child {
+        font-weight: 600;
+        color: #2c3e50;
+        font-size: 1rem;
+      }
+
+      span:last-child {
+        font-weight: 700;
+        color: #2c3e50;
+        font-size: 1.1rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .portfolio-card {
+        padding: 1.5rem 1rem;
+      }
+
+      .portfolio-stats {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1rem;
+      }
+
+      .stat .value {
+        font-size: 1.5rem;
+      }
     }
   `]
 })
