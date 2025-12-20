@@ -1,73 +1,78 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { DecimalPipe } from '@angular/common';
-import { CurrencyService, CurrencyCode } from '../../services/currency.service';
+import { 
+  ChangeDetectionStrategy, 
+  Component, 
+  ContentChildren, 
+  QueryList, 
+  AfterContentInit, 
+  computed, 
+  signal
+} from '@angular/core';
+import { BaseTabComponent } from './tabs/base-tab.component';
+import { ProfileTabComponent } from './tabs/profile-tab.component';
+import { PreferencesTabComponent } from './tabs/preferences-tab.component';
 
-interface ProfileForm {
-  fullName: string;
-  email: string;
-  bio: string;
-  phone: string;
-  country: string;
-  avatarUrl: string;
+interface TabInfo {
+  label: string;
+  key: string;
 }
 
 @Component({
   selector: 'app-settings',
   standalone: true,
-  imports: [FormsModule, DecimalPipe],
+  imports: [ProfileTabComponent, PreferencesTabComponent],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SettingsComponent {
-  currencyService = inject(CurrencyService);
+export class SettingsComponent implements AfterContentInit {
+  // Content query to discover tab components projected via ng-content
+  // This allows tabs to be added dynamically from parent components
+  @ContentChildren(BaseTabComponent) 
+  projectedTabs!: QueryList<BaseTabComponent>;
   
-  tabs = [
+  selectedTab = signal<string>('profile');
+  
+  // Static tab registry for directly imported tab components
+  // In a real app, this could be a registry service
+  private staticTabs: TabInfo[] = [
     { label: 'Profile', key: 'profile' },
     { label: 'Notifications', key: 'notifications' },
     { label: 'Security', key: 'security' },
     { label: 'Preferences', key: 'preferences' }
   ];
-  selectedTab = signal('profile');
 
-  profileForm = signal<ProfileForm>({
-    fullName: 'Sridhar Natuva',
-    email: 's.natuva@email.com',
-    bio: 'Financial enthusiast and long-term investor.',
-    phone: '',
-    country: 'United States',
-    avatarUrl: 'https://api.dicebear.com/7.x/adventurer/svg?seed=sridhar'
+  // Compute available tabs: prioritize projected tabs, fallback to static
+  // This demonstrates the power of content queries - tabs can be added dynamically
+  tabs = computed<TabInfo[]>(() => {
+    // If we have projected tabs (via ng-content), use those
+    if (this.projectedTabs && this.projectedTabs.length > 0) {
+      return this.projectedTabs.map(tab => ({
+        label: tab.tabLabel,
+        key: tab.tabKey
+      }));
+    }
+    
+    // Otherwise, use static tab definitions
+    return this.staticTabs;
   });
 
-  countries = ['United States', 'India', 'United Kingdom', 'Canada', 'Australia'];
-
-  // Currency preferences
-  selectedCurrency = this.currencyService.getSelectedCurrency();
-  currencies = this.currencyService.currencies;
+  ngAfterContentInit() {
+    // Content queries are populated after content initialization
+    // If tabs are projected, they'll be available here
+    if (this.projectedTabs && this.projectedTabs.length > 0) {
+      // Set first projected tab as default if available
+      const firstTab = this.projectedTabs.first;
+      if (firstTab) {
+        this.selectedTab.set(firstTab.tabKey);
+      }
+    }
+  }
 
   onTabSelect(tab: string) {
     this.selectedTab.set(tab);
   }
 
-  onAvatarChange(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files[0]) {
-      // In a real app, upload and get URL
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.profileForm.update(form => ({ ...form, avatarUrl: e.target.result }));
-      };
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-
-  onSave() {
-    // Placeholder for save action
-    alert('Profile changes saved!');
-  }
-
-  onCurrencyChange(currency: CurrencyCode) {
-    this.currencyService.setCurrency(currency);
+  isTabActive(tabKey: string): boolean {
+    return this.selectedTab() === tabKey;
   }
 }

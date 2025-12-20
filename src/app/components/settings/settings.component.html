@@ -4,7 +4,7 @@
 </div>
 
 <div class="settings-tabs">
-  @for (tab of tabs; track tab.key) {
+  @for (tab of tabs(); track tab.key) {
     <div
       class="tab"
       [class.active]="selectedTab() === tab.key"
@@ -16,73 +16,17 @@
 </div>
 
 <div class="settings-content">
-  @if (selectedTab() === 'profile') {
-    <form class="profile-form" (ngSubmit)="onSave()">
-      <div class="profile-info">
-        <div class="avatar-section">
-          <img [src]="profileForm().avatarUrl" alt="Avatar" class="avatar" />
-          <label class="avatar-upload">
-            <input type="file" accept="image/*" (change)="onAvatarChange($event)" hidden />
-            <span>Change Avatar</span>
-          </label>
-          <div class="avatar-hint">JPG, GIF or PNG. Max 800K</div>
-        </div>
-        <div class="fields-section">
-          <div class="form-row">
-            <div class="form-group">
-              <label>Full Name</label>
-              <input type="text" [(ngModel)]="profileForm().fullName" name="fullName" />
-            </div>
-            <div class="form-group">
-              <label>Email Address</label>
-              <input type="email" [(ngModel)]="profileForm().email" name="email" />
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Bio</label>
-            <textarea rows="2" [(ngModel)]="profileForm().bio" name="bio"></textarea>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Phone Number</label>
-              <input type="text" [(ngModel)]="profileForm().phone" name="phone" placeholder="(123) 456-7890" />
-            </div>
-            <div class="form-group">
-              <label>Country</label>
-              <select [(ngModel)]="profileForm().country" name="country">
-                @for (country of countries; track country) {
-                  <option [value]="country">{{ country }}</option>
-                }
-              </select>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="form-actions">
-        <button type="submit" class="save-btn">Save Changes</button>
-      </div>
-    </form>
-  } @else if (selectedTab() === 'preferences') {
-    <div class="preferences-form">
-      <div class="preference-section">
-        <h3>Currency</h3>
-        <p class="section-description">Select your preferred currency for viewing portfolio values.</p>
-        <div class="form-group">
-          <label>Display Currency</label>
-          <select [value]="selectedCurrency()" (change)="onCurrencyChange($any($event.target).value)">
-            @for (currency of currencies; track currency.code) {
-              <option [value]="currency.code">
-                {{ currency.name }} ({{ currency.symbol }})
-              </option>
-            }
-          </select>
-          <div class="currency-info">
-            <p>Current exchange rate: 1 USD = {{ currencyService.getExchangeRate(selectedCurrency()) | number:'1.2-4' }} {{ selectedCurrency() }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  } @else {
-    <div class="tab-placeholder">Coming soon...</div>
+  <!-- Render tab components based on selection -->
+  <!-- Using @switch is cleaner than multiple @if/@else -->
+  @switch (selectedTab()) {
+    @case ('profile') {
+      <app-profile-tab />
+    }
+    @case ('preferences') {
+      <app-preferences-tab />
+    }
+    @default {
+      <div class="tab-placeholder">Coming soon...</div>
+    }
   }
 </div>
