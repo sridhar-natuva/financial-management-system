@@ -4,29 +4,24 @@
 </div>
 
 <div class="settings-tabs">
-  @for (tab of tabs(); track tab.key) {
-    <div
-      class="tab"
-      [class.active]="selectedTab() === tab.key"
-      (click)="onTabSelect(tab.key)"
-    >
-      {{ tab.label }}
+  @for (tab of tabsCtrl.tabs(); track tab) {
+    <div class="tab" (click)="tabsCtrl.select(tab)" [class.active]="tab === tabsCtrl.activeTab()">
+      {{ tab.title() }}
     </div>
+  }
+  @if (tabsCtrl.tabs().length === 0) {
+    <div class="tab-placeholder">No tabs available</div> 
   }
 </div>
 
 <div class="settings-content">
-  <!-- Render tab components based on selection -->
-  <!-- Using @switch is cleaner than multiple @if/@else -->
-  @switch (selectedTab()) {
-    @case ('profile') {
+  <app-tabs #tabsCtrl>
+    <app-tab title="Profile">
       <app-profile-tab />
-    }
-    @case ('preferences') {
+    </app-tab>
+
+    <app-tab title="Preferences">
       <app-preferences-tab />
-    }
-    @default {
-      <div class="tab-placeholder">Coming soon...</div>
-    }
-  }
+    </app-tab>
+  </app-tabs>
 </div>

@@ -32,7 +32,7 @@
           <label>Country</label>
           <select [(ngModel)]="profileForm().country" name="country">
             @for (country of countries; track country) {
-              <option [value]="country">{{ country }}</option>
+            <option [value]="country">{{ country }}</option>
             }
           </select>
         </div>

@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
-import { CurrencyService, CurrencyCode } from '../../../services/currency.service';
-import { BaseTabComponent } from './base-tab.component';
+import { CurrencyService, CurrencyCode } from '../../../../services/currency.service';
 
 @Component({
   selector: 'app-preferences-tab',
@@ -11,10 +10,7 @@ import { BaseTabComponent } from './base-tab.component';
   styleUrl: './preferences-tab.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PreferencesTabComponent extends BaseTabComponent {
-  tabKey = 'preferences';
-  tabLabel = 'Preferences';
-
+export class PreferencesTabComponent {
   currencyService = inject(CurrencyService);
   selectedCurrency = this.currencyService.getSelectedCurrency();
   currencies = this.currencyService.currencies;

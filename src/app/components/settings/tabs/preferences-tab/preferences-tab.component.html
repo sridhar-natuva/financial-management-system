@@ -6,13 +6,14 @@
       <label>Display Currency</label>
       <select [value]="selectedCurrency()" (change)="onCurrencyChange($any($event.target).value)">
         @for (currency of currencies; track currency.code) {
-          <option [value]="currency.code">
-            {{ currency.name }} ({{ currency.symbol }})
-          </option>
+        <option [value]="currency.code">
+          {{ currency.name }} ({{ currency.symbol }})
+        </option>
         }
       </select>
       <div class="currency-info">
-        <p>Current exchange rate: 1 USD = {{ currencyService.getExchangeRate(selectedCurrency()) | number:'1.2-4' }} {{ selectedCurrency() }}</p>
+        <p>Current exchange rate: 1 USD = {{ currencyService.getExchangeRate(selectedCurrency()) | number:'1.2-4' }} {{
+          selectedCurrency() }}</p>
       </div>
     </div>
   </div>

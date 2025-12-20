@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BaseTabComponent } from './base-tab.component';
 
 interface ProfileForm {
   fullName: string;
@@ -19,10 +18,7 @@ interface ProfileForm {
   styleUrl: './profile-tab.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProfileTabComponent extends BaseTabComponent {
-  tabKey = 'profile';
-  tabLabel = 'Profile';
-
+export class ProfileTabComponent {
   profileForm = signal<ProfileForm>({
     fullName: 'Sridhar Natuva',
     email: 's.natuva@email.com',

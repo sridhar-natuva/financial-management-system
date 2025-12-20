@@ -21,7 +21,6 @@ export const routes: Routes = [
   {
     path: 'history',
     loadComponent: () => import('./components/history/history.component').then(m => m.HistoryComponent)
-  },
-  // { path: 'analystics', component: DashboardComponent }
+  }
 
 ];
