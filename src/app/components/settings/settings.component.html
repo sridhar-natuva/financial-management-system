@@ -3,25 +3,23 @@
   <p class="subtitle">Manage your account and application preferences.</p>
 </div>
 
-<div class="settings-tabs">
-  @for (tab of tabsCtrl.tabs(); track tab) {
-    <div class="tab" (click)="tabsCtrl.select(tab)" [class.active]="tab === tabsCtrl.activeTab()">
-      {{ tab.title() }}
+<div apTabs>
+  <div class="settings-tabs">
+    <div apTabTrigger tabId="profile" class="tab">
+      Profile
     </div>
-  }
-  @if (tabsCtrl.tabs().length === 0) {
-    <div class="tab-placeholder">No tabs available</div> 
-  }
-</div>
+    <div apTabTrigger tabId="preferences" class="tab">
+      Preferences
+    </div>
+  </div>
 
-<div class="settings-content">
-  <app-tabs #tabsCtrl>
-    <app-tab title="Profile">
+  <div class="settings-content">
+    <section apTabPanel id="profile">
       <app-profile-tab />
-    </app-tab>
+    </section>
 
-    <app-tab title="Preferences">
+    <section apTabPanel id="preferences">
       <app-preferences-tab />
-    </app-tab>
-  </app-tabs>
+    </section>
+  </div>
 </div>

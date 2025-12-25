@@ -12,7 +12,6 @@ import { CurrencyConverterPipe } from '../../pipes/currency-converter.pipe';
   styleUrl: './dashboard.component.scss',
   imports: [
     NgClass,
-    DecimalPipe,
     TitleCasePipe,
     CurrencyConverterPipe
   ],

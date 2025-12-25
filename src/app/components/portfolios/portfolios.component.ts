@@ -17,7 +17,6 @@ interface Tab {
   imports: [
     NgClass,
     DatePipe,
-    DecimalPipe,
     TitleCasePipe,
     CurrencyConverterPipe
   ],

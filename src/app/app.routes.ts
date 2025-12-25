@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { portfolioResolver } from './components/portfolio-detail/portfolio.resolver';
+import { SettingsComponent } from './components/settings/settings.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -11,7 +12,7 @@ export const routes: Routes = [
   },
   {
     path: 'settings',
-    loadComponent: () => import('./components/settings/settings.component').then(m => m.SettingsComponent)
+    component: SettingsComponent
   },
   {
     path: 'portfolio/:id',

@@ -23,6 +23,7 @@
             "polyfills": [
               "zone.js"
             ],
+            "preserveSymlinks": true,
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -100,7 +101,10 @@
     }
   },
   "cli": {
-    "analytics": "54c3accb-d84b-4c3e-931d-4927de1c2a5d"
+    "analytics": "54c3accb-d84b-4c3e-931d-4927de1c2a5d",
+    "cache": {
+      "enabled": false
+    }
   },
   "schematics": {
     "@schematics/angular:component": {
