@@ -4,21 +4,21 @@
 </div>
 
 <div apTabs>
-  <div class="settings-tabs">
-    <div apTabTrigger tabId="profile" class="tab">
+  <div apTabList class="settings-tabs" selectedTab="profile">
+    <div apTabTrigger tabId="profile" value="profile" class="tab">
       Profile
     </div>
-    <div apTabTrigger tabId="preferences" class="tab">
+    <div apTabTrigger tabId="preferences" value="preferences" class="tab">
       Preferences
     </div>
   </div>
 
   <div class="settings-content">
-    <section apTabPanel id="profile">
+    <section apTabPanel id="profile" value="profile">
       <app-profile-tab />
     </section>
 
-    <section apTabPanel id="preferences">
+    <section apTabPanel id="preferences" value="preferences">
       <app-preferences-tab />
     </section>
   </div>

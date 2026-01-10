@@ -4,6 +4,7 @@ import { Portfolio, TopHolding } from '../../models/portfolio.model';
 import { DecimalPipe, NgClass, TitleCasePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { CurrencyConverterPipe } from '../../pipes/currency-converter.pipe';
+import { TooltipDirective, TooltipContentDirective, TooltipTriggerDirective } from '@sridhar_natuva/primitives';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +14,10 @@ import { CurrencyConverterPipe } from '../../pipes/currency-converter.pipe';
   imports: [
     NgClass,
     TitleCasePipe,
-    CurrencyConverterPipe
+    CurrencyConverterPipe,
+    TooltipDirective,
+    TooltipContentDirective,
+    TooltipTriggerDirective
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

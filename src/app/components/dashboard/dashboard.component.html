@@ -16,7 +16,19 @@
     </div>
   </div>
   <div class="summary-card asset-allocation">
-    <div class="summary-title">Asset Allocation</div>
+    <div class="summary-title">
+      <span>Asset Allocation</span>
+
+      <div apTooltip>
+        <span apTooltipTrigger class="material-symbols-outlined">
+          info
+        </span>
+        <ng-template apTooltipContent>
+          This action cannot be undone
+        </ng-template>
+      </div>
+
+    </div>
     <div class="allocation-list">
       @for (alloc of assetAllocation(); track alloc.type) {
       <div class="allocation-item">

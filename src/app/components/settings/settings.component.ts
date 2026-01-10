@@ -4,7 +4,7 @@ import {
   effect,
   viewChild,
 } from '@angular/core';
-import { TabPanelDirective, TabTriggerDirective, TabsDirective } from '@sridhar_natuva/primitives';
+import { TabListDirective, TabPanelDirective, TabTriggerDirective, TabsDirective } from '@sridhar_natuva/primitives';
 import { ProfileTabComponent } from './tabs/profile-tab/profile-tab.component';
 import { PreferencesTabComponent } from './tabs/preferences-tab/preferences-tab.component';
 
@@ -17,16 +17,10 @@ import { PreferencesTabComponent } from './tabs/preferences-tab/preferences-tab.
     TabsDirective,
     TabTriggerDirective,
     TabPanelDirective,
+    TabListDirective
   ],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SettingsComponent {
-  tabState = viewChild(TabsDirective);
-
-  constructor() {
-    effect(() => { console.log(this.tabState()) });
-  }
-
-}
+export class SettingsComponent { }
