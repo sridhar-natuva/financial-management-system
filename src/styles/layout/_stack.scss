@@ -1,0 +1,11 @@
+// layout/_stack.scss
+@mixin stack {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin stack-until($key) {
+    @include until($key) {
+        @include stack;
+    }
+}

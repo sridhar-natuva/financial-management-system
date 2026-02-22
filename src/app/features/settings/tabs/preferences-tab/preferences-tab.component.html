@@ -1,0 +1,20 @@
+<div class="preferences-form">
+  <div class="preference-section">
+    <h3>Currency</h3>
+    <p class="section-description">Select your preferred currency for viewing portfolio values.</p>
+    <div class="form-group">
+      <label>Display Currency</label>
+      <select [value]="selectedCurrency()" (change)="onCurrencyChange($any($event.target).value)">
+        @for (currency of currencies; track currency.code) {
+        <option [value]="currency.code">
+          {{ currency.name }} ({{ currency.symbol }})
+        </option>
+        }
+      </select>
+      <div class="currency-info">
+        <p>Current exchange rate: 1 USD = {{ currencyService.getExchangeRate(selectedCurrency()) | number:'1.2-4' }} {{
+          selectedCurrency() }}</p>
+      </div>
+    </div>
+  </div>
+</div>

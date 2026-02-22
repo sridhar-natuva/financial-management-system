@@ -1,0 +1,10 @@
+// core/_media.scss
+@function bp($key) {
+    @return map-get($breakpoints, $key);
+}
+
+@mixin above($key) {
+    @media (min-width: bp($key)) {
+        @content;
+    }
+}

@@ -1,0 +1,29 @@
+<div class="settings-header">
+  <h1>Settings</h1>
+  <p class="subtitle">Manage your account and application preferences.</p>
+</div>
+
+<div apTabs #tabs="apTabs">
+  <div apTabList class="settings-tabs" selectedTab="profile">
+    <span apTabTrigger tabId="profile" value="profile" class="tab">
+      Profile
+    </span>
+    <span apTabTrigger tabId="preferences" value="preferences" class="tab">
+      Preferences
+    </span>
+  </div>
+
+  <div class="settings-content">
+    <section apTabPanel id="profile" value="profile">
+      <app-tab>
+        <app-profile-tab />
+      </app-tab>
+    </section>
+
+    <section apTabPanel id="preferences" value="preferences">
+      <app-tab>
+        <app-preferences-tab />
+      </app-tab>
+    </section>
+  </div>
+</div>

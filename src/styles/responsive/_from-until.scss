@@ -1,0 +1,12 @@
+// responsive/_from-until.scss
+@mixin from($key) {
+    @include above($key) {
+        @content;
+    }
+}
+
+@mixin until($key) {
+    @include below($key) {
+        @content;
+    }
+}
