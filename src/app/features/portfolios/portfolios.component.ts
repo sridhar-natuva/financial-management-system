@@ -3,6 +3,7 @@ import { PortfolioService } from '../../shared/services/portfolio.service';
 import { Portfolio } from '../../shared/models/portfolio.model';
 import { DatePipe, DecimalPipe, NgClass, TitleCasePipe } from '@angular/common';
 import { CurrencyConverterPipe } from '../../shared/pipes/currency-converter.pipe';
+import { BadgeComponent, CardComponent, StatComponent, ProgressBarComponent, ButtonComponent, ProgressSegment } from '../../shared/ui';
 
 interface Tab {
   label: string;
@@ -15,10 +16,14 @@ interface Tab {
   templateUrl: './portfolios.component.html',
   styleUrl: './portfolios.component.scss',
   imports: [
-    NgClass,
     DatePipe,
     TitleCasePipe,
-    CurrencyConverterPipe
+    CurrencyConverterPipe,
+    BadgeComponent,
+    CardComponent,
+    StatComponent,
+    ProgressBarComponent,
+    ButtonComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -62,7 +67,7 @@ export class PortfoliosComponent {
     return { value: 0, period: '1Y' };
   }
 
-  getAssetMix(portfolio: Portfolio): { color: string, width: string }[] {
+  getAssetMix(portfolio: Portfolio): ProgressSegment[] {
     // For demo, return a static mix
     return [
       { color: '#6c63ff', width: '40%' },

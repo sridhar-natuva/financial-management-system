@@ -74,19 +74,6 @@
     display: flex;
     justify-content: flex-end;
     margin-top: 1.5rem;
-    .save-btn {
-      background: #2563eb;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 0.7rem 2.2rem;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(37,99,235,0.08);
-      transition: background 0.2s;
-      &:hover { background: #174ea6; }
-    }
   }
 }
 

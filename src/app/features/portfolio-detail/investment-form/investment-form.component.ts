@@ -2,10 +2,11 @@ import { ChangeDetectionStrategy, Component, inject, output } from '@angular/cor
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Investment } from '../../../shared/models/portfolio.model';
 import { PortfolioService } from '../../../shared/services/portfolio.service';
+import { ButtonComponent } from '../../../shared/ui';
 
 @Component({
   selector: 'app-investment-form',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, ButtonComponent],
   template: `
     <div class="form-container">
       <h2>Add New Investment</h2>
@@ -65,8 +66,8 @@ import { PortfolioService } from '../../../shared/services/portfolio.service';
         </div>
 
         <div class="form-actions">
-          <button type="submit" [disabled]="!investmentForm.valid">Add Investment</button>
-          <button type="button" (click)="resetForm()">Reset</button>
+          <app-button type="submit" [disabled]="!investmentForm.valid">Add Investment</app-button>
+          <app-button type="button" variant="secondary" (click)="resetForm()">Reset</app-button>
         </div>
       </form>
     </div>
@@ -104,23 +105,6 @@ import { PortfolioService } from '../../../shared/services/portfolio.service';
       display: flex;
       gap: 10px;
       margin-top: 20px;
-    }
-    button {
-      padding: 8px 16px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    button[type="submit"] {
-      background: #2c3e50;
-      color: white;
-    }
-    button[type="submit"]:disabled {
-      background: #cccccc;
-      cursor: not-allowed;
-    }
-    button[type="button"] {
-      background: #e9ecef;
     }
   `],
   changeDetection: ChangeDetectionStrategy.OnPush

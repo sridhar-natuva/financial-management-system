@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ButtonComponent } from '../../../../shared/ui';
 
 interface ProfileForm {
   fullName: string;
@@ -13,7 +14,7 @@ interface ProfileForm {
 @Component({
   selector: 'app-profile-tab',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, ButtonComponent],
   templateUrl: './profile-tab.component.html',
   styleUrl: './profile-tab.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

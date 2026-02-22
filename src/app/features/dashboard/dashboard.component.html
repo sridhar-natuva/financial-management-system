@@ -4,21 +4,20 @@
 </div>
 
 <div class="dashboard-summary-row">
-  <div class="summary-card portfolio-value">
+  <app-card class="summary-card portfolio-value">
     <div class="summary-title">Total Portfolio Value</div>
     <div class="summary-value">{{ totalPortfolioValue() | currencyConverter:'1.0-2' }}</div>
     <div class="summary-growth positive">
       <span>&uarr; +{{ growthPercent }}% last 24h</span>
     </div>
     <div class="summary-actions">
-      <button class="primary" (click)="onAddInvestment()">Add Investment</button>
-      <button class="secondary" (click)="onViewHistory()">View History</button>
+      <app-button variant="primary" (click)="onAddInvestment()">Add Investment</app-button>
+      <app-button variant="secondary" (click)="onViewHistory()">View History</app-button>
     </div>
-  </div>
-  <div class="summary-card asset-allocation">
+  </app-card>
+  <app-card class="summary-card asset-allocation">
     <div class="summary-title">
       <span>Asset Allocation</span>
-
       <div apTooltip>
         <span apTooltipTrigger class="material-symbols-outlined">
           info
@@ -27,20 +26,19 @@
           tooltip content
         </ng-template>
       </div>
-
     </div>
     <div class="allocation-list">
       @for (alloc of assetAllocation(); track alloc.type) {
-      <div class="allocation-item">
-        <span class="type">{{ alloc.type | titlecase }}</span>
-        <div class="bar-bg">
-          <div class="bar" [style.width]="alloc.percent + '%'" [attr.data-type]="alloc.type"></div>
+        <div class="allocation-item">
+          <span class="type">{{ alloc.type | titlecase }}</span>
+          <div class="bar-bg">
+            <div class="bar" [style.width]="alloc.percent + '%'" [attr.data-type]="alloc.type"></div>
+          </div>
+          <span class="percent">{{ alloc.percent }}%</span>
         </div>
-        <span class="percent">{{ alloc.percent }}%</span>
-      </div>
       }
     </div>
-  </div>
+  </app-card>
 </div>
 
 <div class="my-portfolios-section">
@@ -50,23 +48,21 @@
   </div>
   <div class="portfolio-cards">
     @for (portfolio of portfolios(); track portfolio.id) {
-    <div class="portfolio-card">
+    <app-card class="portfolio-card">
       <div class="card-header">
         <h3>{{ portfolio.name }}</h3>
-        <span class="badge" [ngClass]="portfolio.name.toLowerCase().includes('conservative') ? 'balanced' : 'active'">
+        <app-badge [variant]="portfolio.name.toLowerCase().includes('conservative') ? 'balanced' : 'active'">
           {{ portfolio.name.toLowerCase().includes('conservative') ? 'Balanced' : 'Active' }}
-        </span>
+        </app-badge>
       </div>
       <div class="card-body">
         <div class="portfolio-stats">
-          <div class="stat">
-            <span class="label">Total Value</span>
-            <span class="value">{{ portfolio.totalValue | currencyConverter:'1.0-2' }}</span>
-          </div>
-          <div class="stat">
-            <span class="label">Investments</span>
-            <span class="value">{{ portfolio.investments.length }}</span>
-          </div>
+          <app-stat label="Total Value">
+            {{ portfolio.totalValue | currencyConverter:'1.0-2' }}
+          </app-stat>
+          <app-stat label="Investments">
+            {{ portfolio.investments.length }}
+          </app-stat>
         </div>
         <div class="top-holdings">
           <span class="label">Top Holdings</span>
@@ -79,8 +75,8 @@
           }
         </div>
       </div>
-      <button class="view-portfolio" (click)="onViewPortfolio(portfolio.id)">View Details</button>
-    </div>
+      <app-button variant="outline" (click)="onViewPortfolio(portfolio.id)">View Details</app-button>
+    </app-card>
     }
   </div>
 </div>

@@ -1,9 +1,9 @@
 <div class="portfolios-header">
   <h1>My Portfolios</h1>
   <p class="subtitle">Manage and track your investments.</p>
-  <button class="create-btn" (click)="onCreatePortfolio()">
-    <span>+ Create New Portfolio</span>
-  </button>
+  <app-button variant="primary" (click)="onCreatePortfolio()">
+    + Create New Portfolio
+  </app-button>
 </div>
 
 <div class="tabs">
@@ -18,33 +18,28 @@
 <div class="portfolio-cards">
   @if (filteredPortfolios().length > 0) {
   @for (portfolio of filteredPortfolios(); track portfolio.id) {
-  <div class="portfolio-card">
+  <app-card class="portfolio-card">
     <div class="card-header">
       <h2>{{ portfolio.name }}</h2>
-      <span class="badge" [ngClass]="getPortfolioType(portfolio)">
+      <app-badge [variant]="getPortfolioType(portfolio)">
         {{ getPortfolioType(portfolio) | titlecase }}
-      </span>
+      </app-badge>
     </div>
     <div class="card-body">
       <div class="portfolio-stats">
-        <div class="stat">
-          <span class="label">Total Value</span>
-          <span class="value">{{ portfolio.totalValue | currencyConverter:'1.0-2' }}</span>
-        </div>
-        <div class="stat">
-          <span class="label">Return ({{ getReturn(portfolio).period }})</span>
-          <span class="value" [ngClass]="getReturn(portfolio).value >= 0 ? 'positive' : 'negative'">
-            {{ getReturn(portfolio).value >= 0 ? '+' : '' }}{{ getReturn(portfolio).value }}%
-          </span>
-        </div>
+        <app-stat label="Total Value">
+          {{ portfolio.totalValue | currencyConverter:'1.0-2' }}
+        </app-stat>
+        <app-stat 
+          [label]="'Return (' + getReturn(portfolio).period + ')'"
+          [positive]="getReturn(portfolio).value >= 0"
+          [negative]="getReturn(portfolio).value < 0">
+          {{ getReturn(portfolio).value >= 0 ? '+' : '' }}{{ getReturn(portfolio).value }}%
+        </app-stat>
       </div>
       <div class="asset-mix">
         <span class="label">Asset Mix:</span>
-        <div class="mix-bar">
-          @for (mix of getAssetMix(portfolio); track $index) {
-          <div class="mix-segment" [style.background]="mix.color" [style.width]="mix.width"></div>
-          }
-        </div>
+        <app-progress-bar [segments]="getAssetMix(portfolio)" />
       </div>
       <div class="dates">
         @if (getPortfolioType(portfolio) !== 'closed') {
@@ -55,9 +50,9 @@
       </div>
     </div>
     <div class="card-footer">
-      <button class="manage-btn">Manage Portfolio</button>
+      <app-button variant="outline">Manage Portfolio</app-button>
     </div>
-  </div>
+  </app-card>
   }
   } @else {
   <div class="no-portfolios">No portfolios found for this filter.</div>

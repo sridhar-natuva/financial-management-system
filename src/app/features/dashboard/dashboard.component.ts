@@ -5,6 +5,7 @@ import { DecimalPipe, NgClass, TitleCasePipe } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { CurrencyConverterPipe } from '../../shared/pipes/currency-converter.pipe';
 import { TooltipDirective, TooltipContentDirective, TooltipTriggerDirective } from '@sridhar_natuva/primitives';
+import { BadgeComponent, CardComponent, StatComponent, ButtonComponent } from '../../shared/ui';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,13 +13,16 @@ import { TooltipDirective, TooltipContentDirective, TooltipTriggerDirective } fr
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
   imports: [
-    NgClass,
     TitleCasePipe,
     CurrencyConverterPipe,
     RouterLink,
     TooltipDirective,
     TooltipContentDirective,
-    TooltipTriggerDirective
+    TooltipTriggerDirective,
+    BadgeComponent,
+    CardComponent,
+    StatComponent,
+    ButtonComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
