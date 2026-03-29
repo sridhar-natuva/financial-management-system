@@ -29,13 +29,13 @@
     </div>
     <div class="allocation-list">
       @for (alloc of assetAllocation(); track alloc.type) {
-        <div class="allocation-item">
-          <span class="type">{{ alloc.type | titlecase }}</span>
-          <div class="bar-bg">
-            <div class="bar" [style.width]="alloc.percent + '%'" [attr.data-type]="alloc.type"></div>
-          </div>
-          <span class="percent">{{ alloc.percent }}%</span>
+      <div class="allocation-item">
+        <span class="type">{{ alloc.type | titlecase }}</span>
+        <div class="bar-bg">
+          <div class="bar" [style.width]="alloc.percent + '%'" [attr.data-type]="alloc.type"></div>
         </div>
+        <span class="percent">{{ alloc.percent }}%</span>
+      </div>
       }
     </div>
   </app-card>
@@ -66,7 +66,7 @@
         </div>
         <div class="top-holdings">
           <span class="label">Top Holdings</span>
-          @for (holding of getTopHoldings(portfolio); track holding.name) {
+          @for (holding of getTopHoldings(portfolio.id); track holding.name) {
           <div class="holding-item">
             <span class="icon" [attr.data-type]="holding.type"></span>
             <span class="name">{{ holding.name }}</span>

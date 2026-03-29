@@ -4,10 +4,15 @@ import { CurrencyService } from '../services/currency.service';
 @Pipe({
   name: 'currencyConverter',
   standalone: true,
-  pure: false // Make it impure to react to currency changes
+  pure: true // ✅ Make pipe pure - only runs when inputs change
 })
 export class CurrencyConverterPipe implements PipeTransform {
   private currencyService = inject(CurrencyService);
+
+  // Cache currency data to avoid repeated signal reads
+  private cachedCurrency: string = '';
+  private cachedRate: number = 1;
+  private cachedSymbol: string = '$';
 
   transform(value: number | null | undefined, digitsInfo: string = '1.0-2'): string {
     if (value == null || isNaN(value)) {
@@ -15,10 +20,17 @@ export class CurrencyConverterPipe implements PipeTransform {
     }
 
     const currentCurrency = this.currencyService.getSelectedCurrency()();
-    const currency = this.currencyService.getCurrentCurrency();
 
-    // Convert value
-    const convertedValue = this.currencyService.convert(value);
+    // Update cache if currency changed
+    if (currentCurrency !== this.cachedCurrency) {
+      this.cachedCurrency = currentCurrency;
+      this.cachedRate = this.currencyService.getExchangeRate(currentCurrency);
+      const currency = this.currencyService.getCurrentCurrency();
+      this.cachedSymbol = currency.symbol;
+    }
+
+    // Convert value using cached rate
+    const convertedValue = value * this.cachedRate;
 
     // Parse digits info (format: "minIntegerDigits.minFractionDigits-maxFractionDigits")
     const parts = digitsInfo.split('.');
@@ -32,7 +44,7 @@ export class CurrencyConverterPipe implements PipeTransform {
       maximumFractionDigits: maxFractionDigits
     }).format(convertedValue);
 
-    // Build result with currency symbol
-    return `${currency.symbol}${formattedValue}`;
+    // Build result with cached currency symbol
+    return `${this.cachedSymbol}${formattedValue}`;
   }
 }

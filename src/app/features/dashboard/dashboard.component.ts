@@ -42,6 +42,25 @@ export class DashboardComponent {
     this.portfolios().reduce((sum, p) => sum + p.totalValue, 0)
   );
 
+  // Memoized top holdings calculation - computed once per portfolio change
+  topHoldingsByPortfolio = computed(() => {
+    const holdings: Record<string, TopHolding[]> = {};
+
+    this.portfolios().forEach(portfolio => {
+      const sorted = [...portfolio.investments]
+        .sort((a, b) => (b.quantity * b.currentPrice) - (a.quantity * a.currentPrice))
+        .slice(0, 2)
+        .map(inv => ({
+          name: inv.name,
+          value: inv.quantity * inv.currentPrice,
+          type: inv.type
+        }));
+
+      holdings[portfolio.id] = sorted;
+    });
+
+    return holdings;
+  });
 
   // Asset allocation by type
   assetAllocation = computed(() => {
@@ -63,15 +82,8 @@ export class DashboardComponent {
     }));
   });
 
-  getTopHoldings(portfolio: Portfolio): TopHolding[] {
-    return [...portfolio.investments]
-      .sort((a, b) => (b.quantity * b.currentPrice) - (a.quantity * a.currentPrice))
-      .slice(0, 2)
-      .map(inv => ({
-        name: inv.name,
-        value: inv.quantity * inv.currentPrice,
-        type: inv.type
-      }));
+  getTopHoldings(portfolioId: string): TopHolding[] {
+    return this.topHoldingsByPortfolio()[portfolioId] || [];
   }
 
   private formatAssetType(type: string): string {
