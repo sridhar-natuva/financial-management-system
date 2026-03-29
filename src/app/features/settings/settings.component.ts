@@ -27,12 +27,4 @@ import { Tab } from '../../shared/ui/tab/tab';
   styleUrl: './settings.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SettingsComponent {
-  // @ViewChild('tabs', { read: TabsDirective })
-  // tabs!: TabsDirective;
-  // ngAfterViewInit() {
-  //   effect(() => {
-  //     console.log('Selected Tab:', this.tabs);
-  //   });
-  // }
-}
+export class SettingsComponent { }
