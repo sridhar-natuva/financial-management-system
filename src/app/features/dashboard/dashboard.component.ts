@@ -4,7 +4,7 @@ import { Portfolio, TopHolding } from '../../shared/models/portfolio.model';
 import { DecimalPipe, NgClass, TitleCasePipe } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { CurrencyConverterPipe } from '../../shared/pipes/currency-converter.pipe';
-import { TooltipDirective, TooltipContentDirective, TooltipTriggerDirective } from '@sridhar_natuva/primitives';
+import { TooltipDirective, TooltipContentDirective, TooltipTriggerDirective } from '@snatuva/primitives';
 import { BadgeComponent, CardComponent, StatComponent, ButtonComponent } from '../../shared/ui';
 
 @Component({
